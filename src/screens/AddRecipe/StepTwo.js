@@ -16,7 +16,7 @@ const StepTwo = () => {
         label="This is a recipe for:"
         placeholder="400g / 2 people"
       />
-      <ScrollableList />
+      <ScrollableList type="ingredients" />
       <NextStep />
     </ScreenContainer>
   );
