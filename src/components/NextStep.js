@@ -1,19 +1,24 @@
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Colors } from '../styles';
 
 const NextStep = () => {
   return (
-    <FontAwesomeIcon style={styles.icon} icon={faChevronRight} size={30} />
+    <View style={styles.wrapper}>
+      <FontAwesomeIcon style={styles.icon} icon={faChevronRight} size={30} />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  icon: {
+  wrapper: {
     marginTop: 'auto',
     marginLeft: 'auto',
+  },
+  icon: {
+    marginTop: 30,
     color: Colors.darkGarlic,
   },
 });

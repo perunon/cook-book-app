@@ -5,7 +5,7 @@ import { Typography, Colors } from '../styles';
 const DetailInputBlock = ({ label, placeholder }) => {
   return (
     <View style={styles.wrapper}>
-      <Text style={styles.text}> {label} </Text>
+      <Text style={styles.text}>{label}</Text>
       <TextInput
         style={[styles.text, styles.input]}
         placeholder={placeholder}

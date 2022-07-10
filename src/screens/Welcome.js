@@ -9,7 +9,7 @@ import {
 import Footer from '../components/Footer';
 import { Colors, Typography } from '../styles';
 
-const Welcome = () => {
+const Welcome = ({ navigation }) => {
   return (
     <>
       <View style={styles.background}>
@@ -17,7 +17,12 @@ const Welcome = () => {
           <Text style={styles.title}>Cook Book App</Text>
           <Text style={styles.subtitle}>All your recipes in one place!</Text>
           <Text style={styles.question}>What do you want to do?</Text>
-          <MenuOption text="Add new recipe" icon={faPencil} />
+          <MenuOption
+            text="Add new recipe"
+            icon={faPencil}
+            onPress={navigation.navigate}
+            target="AddNewRecipe"
+          />
           <MenuOption text="Browse saved recipes" icon={faFolderOpen} />
           <MenuOption
             text="What should i cook today?"

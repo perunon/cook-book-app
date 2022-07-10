@@ -1,14 +1,22 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableHighlight,
+  TouchableOpacity,
+} from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Colors, Typography } from '../styles';
 
-const MenuOption = ({ text, icon }) => {
+const MenuOption = ({ text, icon, onPress, target }) => {
   return (
-    <View style={styles.button}>
-      <FontAwesomeIcon icon={icon} size={30} style={{ color: '#2f2f2f' }} />
-      <Text style={styles.buttonText}>{text}</Text>
-    </View>
+    <TouchableOpacity onPress={() => onPress(target)}>
+      <View style={styles.button}>
+        <FontAwesomeIcon icon={icon} size={30} style={{ color: '#2f2f2f' }} />
+        <Text style={styles.buttonText}>{text}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 

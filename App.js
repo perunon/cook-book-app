@@ -5,15 +5,13 @@ import {
   NotoSans_700Bold,
   NotoSans_700Bold_Italic,
 } from '@expo-google-fonts/noto-sans';
-import { StyleSheet } from 'react-native';
 import Welcome from './src/screens/Welcome';
-import RecipeCreator from './src/screens/RecipeCreator';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HeaderBar from './src/components/HeaderBar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import StepOne from './src/screens/AddRecipe/StepOne';
-import StepTwo from './src/screens/AddRecipe/StepTwo';
+import AddNewRecipe from './src/screens/AddRecipe';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,9 +32,9 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="CreateNewRecipe"
+          initialRouteName="Welcome"
           screenOptions={{
-            header: HeaderBar,
+            header: (props) => <HeaderBar {...props} />,
           }}
         >
           <Stack.Screen
@@ -44,7 +42,13 @@ export default function App() {
             component={Welcome}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="CreateNewRecipe" component={StepTwo} />
+          <Stack.Group>
+            <Stack.Screen
+              name="AddNewRecipe"
+              component={AddNewRecipe}
+              options={{ title: 'Add New Recipe' }}
+            />
+          </Stack.Group>
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
