@@ -13,6 +13,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import StepOne from './src/screens/AddRecipe/StepOne';
 import AddNewRecipe from './src/screens/AddRecipe';
 import Recipe from './src/screens/Recipe';
+import RecipeStep from './src/screens/RecipeStep';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,7 +47,7 @@ export default function App() {
           <Stack.Group>
             <Stack.Screen
               name="Recipe"
-              component={Recipe}
+              component={RecipeStep}
               options={{ title: 'Add New Recipe' }}
             />
           </Stack.Group>
