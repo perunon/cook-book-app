@@ -12,6 +12,7 @@ import HeaderBar from './src/components/HeaderBar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import StepOne from './src/screens/AddRecipe/StepOne';
 import AddNewRecipe from './src/screens/AddRecipe';
+import Recipe from './src/screens/Recipe';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,7 +33,7 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Welcome"
+          initialRouteName="Recipe"
           screenOptions={{
             header: (props) => <HeaderBar {...props} />,
           }}
@@ -44,8 +45,8 @@ export default function App() {
           />
           <Stack.Group>
             <Stack.Screen
-              name="AddNewRecipe"
-              component={AddNewRecipe}
+              name="Recipe"
+              component={Recipe}
               options={{ title: 'Add New Recipe' }}
             />
           </Stack.Group>

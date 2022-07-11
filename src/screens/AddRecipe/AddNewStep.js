@@ -7,17 +7,14 @@ import TextArea from '../../components/TextArea';
 import { Colors } from '../../styles';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import FitImage from 'react-native-fit-image';
+import TitleImage from '../../components/TitleImage';
 
 const image = require('../../../assets/zupa_szpinakowa.jpg');
 
 const AddNewStep = () => {
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
-      <View style={styles.imageView}>
-        <FitImage source={image} style={styles.image} />
-
-        {/* <FontAwesomeIcon icon={faPlus} size={100} color="white" /> */}
-      </View>
+      <TitleImage />
       <ScreenContainer>
         <TextArea
           label="New Step"
@@ -30,21 +27,5 @@ const AddNewStep = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  imageView: {
-    width: '100%',
-    height: 200,
-    marginTop: 20,
-    backgroundColor: Colors.salt,
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
-  },
-  image: {
-    width: '100%',
-    height: 200,
-  },
-});
 
 export default AddNewStep;
