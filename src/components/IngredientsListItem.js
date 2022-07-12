@@ -3,13 +3,18 @@ import { StyleSheet } from 'react-native';
 import { Colors } from '../styles';
 import { View, TextInput } from 'react-native';
 
-const IngredientsListItem = ({ data }) => {
+const IngredientsListItem = ({ data, onChange, index }) => {
   return (
     <View style={styles.item}>
-      <TextInput placeholder={data.name} />
+      <TextInput
+        value={data.name}
+        onChangeText={(text) => onChange(index, 'name', text)}
+      />
       <View style={styles.itemRight}>
-        <TextInput placeholder={data.quantity} />
-        <TextInput placeholder={data.unit} />
+        <TextInput
+          value={data.quantity}
+          onChangeText={(text) => onChange(index, 'quantity', text)}
+        />
       </View>
     </View>
   );

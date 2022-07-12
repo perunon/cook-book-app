@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { Typography, Colors } from '../styles';
 
-const TextArea = ({ label, placeholder, numberOfLines }) => {
+const TextArea = ({ label, placeholder, numberOfLines, value, onChange }) => {
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
@@ -11,6 +11,8 @@ const TextArea = ({ label, placeholder, numberOfLines }) => {
         placeholder={placeholder}
         multiline={true}
         numberOfLines={numberOfLines}
+        value={value}
+        onChangeText={(text) => onChange(text)}
       />
     </View>
   );

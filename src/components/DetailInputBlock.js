@@ -2,13 +2,15 @@ import React from 'react';
 import { Text, View, TextInput, StyleSheet } from 'react-native';
 import { Typography, Colors } from '../styles';
 
-const DetailInputBlock = ({ label, placeholder }) => {
+const DetailInputBlock = ({ label, placeholder, value, onChange }) => {
   return (
     <View style={styles.wrapper}>
       <Text style={styles.text}>{label}</Text>
       <TextInput
         style={[styles.text, styles.input]}
         placeholder={placeholder}
+        value={value}
+        onChangeText={(text) => onChange(text)}
       />
     </View>
   );

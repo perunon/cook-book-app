@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, FlatList, StyleSheet, ScrollView } from 'react-native';
 import { Colors, Typography } from '../styles';
 import Button from './Button';
 import IngredientsListItem from './IngredientsListItem';
@@ -37,16 +37,11 @@ const stepsList = [
   },
 ];
 
-const ScrollableList = ({ type }) => {
+const ScrollableList = ({ type, data }) => {
+  const [itemsList, setItemsList] = useState(data);
   const navigation = useNavigation();
-  let items = [];
-  let renderItem = () => {};
+
   switch (type) {
-    case 'ingredients': {
-      items = ingredientsList;
-      renderItem = ({ item }) => <IngredientsListItem data={item} />;
-      break;
-    }
     case 'steps': {
       items = stepsList;
       renderItem = ({ item }) => <StepsListItem data={item} />;
@@ -57,20 +52,19 @@ const ScrollableList = ({ type }) => {
   }
 
   return (
-    <View style={styles.wrapper}>
+    <ScrollView style={styles.wrapper}>
       {type === 'ingredients' && (
         <Text style={styles.listTitle}>Ingredients:</Text>
       )}
-      <FlatList
-        data={items}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      ></FlatList>
+      {type === 'ingredients' &&
+        itemsList.map((item, index) => (
+          <IngredientsListItem data={item} key={index} />
+        ))}
       <Button
         title={type === 'ingredients' ? 'ADD' : 'ADD STEP'}
         onClick={type === 'steps' ? () => navigation.push('AddNewStep') : ''}
       />
-    </View>
+    </ScrollView>
   );
 };
 
