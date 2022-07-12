@@ -47,15 +47,7 @@ const ImagesGrid = () => {
   return (
     <View style={styles.wrapper}>
       {images.map((item) => (
-        <View
-          key={item.id}
-          style={styles.item}
-          onLayout={(event) => {
-            let { width, height } = event.nativeEvent.layout;
-            imageSize[0] = width;
-            imageSize[1] = height;
-          }}
-        >
+        <View key={item.id} style={styles.item}>
           <FitImage source={item.source} style={styles.image} />
         </View>
       ))}

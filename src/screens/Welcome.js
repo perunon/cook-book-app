@@ -21,12 +21,19 @@ const Welcome = ({ navigation }) => {
             text="Add new recipe"
             icon={faPencil}
             onPress={navigation.navigate}
-            target="AddNewRecipe"
+            target="StepOne"
           />
-          <MenuOption text="Browse saved recipes" icon={faFolderOpen} />
+          <MenuOption
+            text="Browse saved recipes"
+            icon={faFolderOpen}
+            onPress={navigation.navigate}
+            target="BrowseRecipes"
+          />
           <MenuOption
             text="What should i cook today?"
             icon={faQuestionCircle}
+            onPress={navigation.navigate}
+            target="DrawRecipe"
           />
           <Footer />
         </View>

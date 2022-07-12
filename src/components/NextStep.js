@@ -1,14 +1,18 @@
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../styles';
+import { useNavigation } from '@react-navigation/native';
 
-const NextStep = () => {
+const NextStep = ({ target }) => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.wrapper}>
-      <FontAwesomeIcon style={styles.icon} icon={faChevronRight} size={30} />
-    </View>
+    <TouchableOpacity onPress={() => navigation.navigate(target)}>
+      <View style={styles.wrapper}>
+        <FontAwesomeIcon style={styles.icon} icon={faChevronRight} size={30} />
+      </View>
+    </TouchableOpacity>
   );
 };
 

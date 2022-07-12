@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import Button from '../components/Button';
 import ScreenContainer from '../components/ScreenContainer';
-import ScreenTitle from '../components/ScreenTitle';
 import TitleImage from '../components/TitleImage';
 import { Colors, Typography } from '../styles';
 
@@ -33,7 +32,7 @@ const ingredients = [
   },
 ];
 
-const Recipe = () => {
+const Recipe = ({ route }) => {
   const renderItem = ({ item }) => (
     <Text style={styles.ingredientsItem}>{item.name}</Text>
   );
@@ -66,10 +65,12 @@ const Recipe = () => {
         <Text style={styles.tagsList}>
           #soup #for-family #vegetarian #spinach
         </Text>
-        <Button
-          title="RETURN TO SUMMARY"
-          style={{ backgroundColor: Colors.garlic }}
-        ></Button>
+        {route.params.preview && (
+          <Button
+            title="RETURN TO SUMMARY"
+            style={{ backgroundColor: Colors.garlic }}
+          ></Button>
+        )}
       </ScreenContainer>
     </View>
   );

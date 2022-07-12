@@ -4,6 +4,7 @@ import { Colors, Typography } from '../styles';
 import Button from './Button';
 import IngredientsListItem from './IngredientsListItem';
 import StepsListItem from './StepsListItem';
+import { useNavigation } from '@react-navigation/native';
 
 const ingredientsList = [
   { id: '1', name: 'Milk', quantity: '400', unit: 'ml' },
@@ -16,11 +17,6 @@ const ingredientsList = [
   { id: '8', name: 'Milk', quantity: '400', unit: 'ml' },
   { id: '9', name: 'Milk', quantity: '400', unit: 'ml' },
   { id: '10', name: 'Milk', quantity: '400', unit: 'ml' },
-  { id: '11', name: 'Milk', quantity: '400', unit: 'ml' },
-  { id: '12', name: 'Milk', quantity: '400', unit: 'ml' },
-  { id: '13', name: 'Milk', quantity: '400', unit: 'ml' },
-  { id: '14', name: 'Milk', quantity: '400', unit: 'ml' },
-  { id: '15', name: 'Milk', quantity: '400', unit: 'ml' },
 ];
 
 const stepsList = [
@@ -42,6 +38,7 @@ const stepsList = [
 ];
 
 const ScrollableList = ({ type }) => {
+  const navigation = useNavigation();
   let items = [];
   let renderItem = () => {};
   switch (type) {
@@ -69,7 +66,10 @@ const ScrollableList = ({ type }) => {
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       ></FlatList>
-      <Button title={type === 'ingredients' ? 'ADD' : 'ADD STEP'} />
+      <Button
+        title={type === 'ingredients' ? 'ADD' : 'ADD STEP'}
+        onClick={type === 'steps' ? () => navigation.push('AddNewStep') : ''}
+      />
     </View>
   );
 };

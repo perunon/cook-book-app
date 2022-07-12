@@ -15,7 +15,9 @@ const HeaderBar = ({ navigation, options }) => {
         <FontAwesomeIcon icon={faAngleLeft} />
         <Text style={styles.headerBarText}>{options.title}</Text>
       </TouchableOpacity>
-      <Text style={[styles.headerBarText, styles.right]}>1/5</Text>
+      <Text style={[styles.headerBarText, styles.right]}>
+        {options.headerRight}
+      </Text>
     </SafeAreaView>
   );
 };

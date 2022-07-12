@@ -1,7 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
 import ScreenTitle from '../../components/ScreenTitle';
 import TextArea from '../../components/TextArea';
 import DetailInputBlock from '../../components/DetailInputBlock';
@@ -31,7 +27,7 @@ const StepOne = () => {
         label={{ text: 'Source:', size: 16 }}
       />
 
-      <NextStep />
+      <NextStep target="StepTwo" />
     </ScreenContainer>
   );
 };

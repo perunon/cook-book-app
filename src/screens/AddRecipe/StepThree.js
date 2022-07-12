@@ -1,4 +1,3 @@
-import React from 'react';
 import NextStep from '../../components/NextStep';
 import ScreenContainer from '../../components/ScreenContainer';
 import ScreenTitle from '../../components/ScreenTitle';
@@ -8,8 +7,8 @@ const StepThree = () => {
   return (
     <ScreenContainer>
       <ScreenTitle text="Let's add some steps to help you with cooking in the future" />
-      <ScrollableList type="steps" />
-      <NextStep />
+      <ScrollableList type="steps" btnTarget="AddNewStep" />
+      <NextStep target="StepFour" />
     </ScreenContainer>
   );
 };

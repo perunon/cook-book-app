@@ -1,21 +1,32 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import Button from '../../components/Button';
 import ImagesGrid from '../../components/ImagesGrid';
-import NextStep from '../../components/NextStep';
 import ScreenContainer from '../../components/ScreenContainer';
 import ScreenTitle from '../../components/ScreenTitle';
 import { Colors, Typography } from '../../styles';
 
-const StepFifth = () => {
+const StepFive = () => {
+  const navigation = useNavigation();
   return (
     <ScreenContainer>
       <ScreenTitle text="You're almost there! Let's add some pictures of your dish and we are ready to serve!" />
       <ImagesGrid />
       <Text style={styles.bottomText}>
         Congratulations! Your recipe is ready to save. Check the{' '}
-        <Text style={styles.greenBottomText}>preview</Text> if you want.
+        <Text
+          style={styles.greenBottomText}
+          onPress={() => navigation.push('Recipe', { preview: true })}
+        >
+          preview{' '}
+        </Text>
+        if you want.
       </Text>
-      <NextStep />
+      <Button
+        title="FINISH"
+        onClick={() => navigation.navigate('BrowseRecipes')}
+      />
     </ScreenContainer>
   );
 };
@@ -36,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StepFifth;
+export default StepFive;

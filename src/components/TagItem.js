@@ -3,11 +3,7 @@ import { StyleSheet, Text } from 'react-native';
 import { Colors, Typography } from '../styles';
 
 const TagItem = ({ data }) => {
-  return (
-    <Text key={data.id} style={styles.tagItem}>
-      {data.name}
-    </Text>
-  );
+  return <Text style={styles.tagItem}>{data.name}</Text>;
 };
 
 const styles = StyleSheet.create({

@@ -26,7 +26,7 @@ const TagsGrid = () => {
   return (
     <View style={styles.container}>
       {tags.map((item) => (
-        <TagItem data={item} />
+        <TagItem key={item.id} data={item} />
       ))}
     </View>
   );
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    marginVertical: 10,
   },
 });
 
