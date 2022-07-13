@@ -1,12 +1,7 @@
-import React, { useState } from 'react';
-import { Text, StyleSheet, ScrollView } from 'react-native';
-import { Colors, Typography } from '../styles';
-import Button from './Button';
+import { StyleSheet, ScrollView } from 'react-native';
 import IngredientsListItem from './IngredientsListItem';
-import StepsListItem from './StepsListItem';
-import { useNavigation } from '@react-navigation/native';
 
-const IngredientsList = ({ data, onChange }) => {
+const IngredientsList = ({ data, onChange, onIngredientDelete }) => {
   return (
     <ScrollView style={styles.wrapper}>
       {data.map((item, index) => (
@@ -15,6 +10,7 @@ const IngredientsList = ({ data, onChange }) => {
           key={index}
           onChange={onChange}
           index={index}
+          onXPress={onIngredientDelete}
         />
       ))}
     </ScrollView>

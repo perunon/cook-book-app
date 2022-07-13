@@ -40,6 +40,12 @@ export const stepTwoSlice = createSlice({
         }
       });
     },
+    removeIngredient: (state, action) => {
+      const index = action.payload;
+      state.ingredients = state.ingredients.filter((ingredient, i) => {
+        return i != index;
+      });
+    },
   },
 });
 
@@ -48,6 +54,7 @@ export const {
   addIngredient,
   removeEmptyIngredients,
   updateIngredient,
+  removeIngredient,
 } = stepTwoSlice.actions;
 
 export default stepTwoSlice.reducer;

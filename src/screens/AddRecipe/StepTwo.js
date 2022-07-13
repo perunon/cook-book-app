@@ -8,6 +8,7 @@ import {
   addIngredient,
   removeEmptyIngredients,
   updateIngredient,
+  removeIngredient,
 } from '../../slices/StepTwoSlice';
 import IngredientsList from '../../components/IngredientsList';
 import Button from '../../components/Button';
@@ -42,6 +43,7 @@ const StepTwo = ({ navigation }) => {
         onChange={(index, field, val) =>
           dispatch(updateIngredient({ index, field, val }))
         }
+        onIngredientDelete={(index) => dispatch(removeIngredient(index))}
       />
       <Button title="ADD" onClick={() => dispatch(addIngredient())} />
       <NextStep target="StepThree" />
