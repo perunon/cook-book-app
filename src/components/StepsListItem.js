@@ -1,23 +1,32 @@
 import { faTrash, faPencil } from '@fortawesome/free-solid-svg-icons';
-
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import FitImage from 'react-native-fit-image';
 import { Colors, Typography } from '../styles';
 
-const StepsListItem = ({ data }) => {
+const StepsListItem = ({ data, index, onDeletePress }) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.wrapper}>
-      <FitImage source={data.img} style={styles.image} />
-      <Text style={styles.text}>{data.text}</Text>
+      {data.imgUri != '' && (
+        <FitImage source={{ uri: data.imgUri }} style={styles.image} />
+      )}
+      <Text style={styles.text}>{data.content}</Text>
       <View style={styles.actionIcons}>
-        <FontAwesomeIcon icon={faPencil} size={20} />
-        <FontAwesomeIcon
-          icon={faTrash}
-          style={{ marginLeft: 10, color: Colors.paprika }}
-          size={20}
-        />
+        <TouchableOpacity
+          onPress={() => navigation.push('EditStep', { index: index })}
+        >
+          <FontAwesomeIcon icon={faPencil} size={20} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => onDeletePress(index)}>
+          <FontAwesomeIcon
+            icon={faTrash}
+            style={{ marginLeft: 10, color: Colors.paprika }}
+            size={20}
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );

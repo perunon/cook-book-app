@@ -16,6 +16,7 @@ import StepThree from './src/screens/AddRecipe/StepThree';
 import StepFour from './src/screens/AddRecipe/StepFour';
 import StepFive from './src/screens/AddRecipe/StepFive';
 import AddNewStep from './src/screens/AddRecipe/AddNewStep';
+import EditStep from './src/screens/AddRecipe/EditStep';
 import BrowseRecipes from './src/screens/BrowseRecipes';
 import Recipe from './src/screens/Recipe';
 import { Provider } from 'react-redux';
@@ -81,6 +82,11 @@ export default function App() {
                 name="AddNewStep"
                 component={AddNewStep}
                 options={{ title: 'Add New Step' }}
+              />
+              <Stack.Screen
+                name="EditStep"
+                component={EditStep}
+                options={{ title: 'Edit Step' }}
               />
               <Stack.Screen
                 name="BrowseRecipes"

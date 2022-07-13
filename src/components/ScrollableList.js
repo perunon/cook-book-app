@@ -1,23 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, StyleSheet, ScrollView } from 'react-native';
+import { Text, StyleSheet, ScrollView } from 'react-native';
 import { Colors, Typography } from '../styles';
 import Button from './Button';
 import IngredientsListItem from './IngredientsListItem';
 import StepsListItem from './StepsListItem';
 import { useNavigation } from '@react-navigation/native';
-
-const ingredientsList = [
-  { id: '1', name: 'Milk', quantity: '400', unit: 'ml' },
-  { id: '2', name: 'Milk', quantity: '400', unit: 'ml' },
-  { id: '3', name: 'Milk', quantity: '400', unit: 'ml' },
-  { id: '4', name: 'Milk', quantity: '400', unit: 'ml' },
-  { id: '5', name: 'Milk', quantity: '400', unit: 'ml' },
-  { id: '6', name: 'Milk', quantity: '400', unit: 'ml' },
-  { id: '7', name: 'Milk', quantity: '400', unit: 'ml' },
-  { id: '8', name: 'Milk', quantity: '400', unit: 'ml' },
-  { id: '9', name: 'Milk', quantity: '400', unit: 'ml' },
-  { id: '10', name: 'Milk', quantity: '400', unit: 'ml' },
-];
 
 const stepsList = [
   {

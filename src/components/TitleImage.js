@@ -1,19 +1,35 @@
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from 'react';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import FitImage from 'react-native-fit-image';
 import { Colors } from '../styles';
+import * as ImagePicker from 'expo-image-picker';
 
-const image = require('../../assets/zupa_szpinakowa.jpg');
+const TitleImage = ({ source, onImageChange }) => {
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
 
-const TitleImage = () => {
+    if (!result.cancelled) {
+      onImageChange(result.uri);
+    }
+  };
+
   return (
-    <View style={styles.imageView}>
-      <FitImage source={image} style={styles.image} />
-
-      {/* <FontAwesomeIcon icon={faPlus} size={100} color="white" />  */}
-    </View>
+    <TouchableWithoutFeedback onPress={pickImage}>
+      <View style={styles.imageView}>
+        {source === '' ? (
+          <FontAwesomeIcon icon={faPlus} size={100} color="white" />
+        ) : (
+          <FitImage source={{ uri: source }} style={styles.image} />
+        )}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
