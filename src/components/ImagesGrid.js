@@ -1,55 +1,43 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import FitImage from 'react-native-fit-image';
+import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '../styles';
+import { useDispatch } from 'react-redux';
+import { setPicture } from '../slices/StepFiveSlice';
 
-const images = [
-  {
-    id: '1',
-    source: require('../../assets/zupa_szpinakowa.jpg'),
-  },
-  {
-    id: '2',
-    source: require('../../assets/zupa_szpinakowa.jpg'),
-  },
-  {
-    id: '3',
-    source: require('../../assets/zupa_szpinakowa.jpg'),
-  },
-  {
-    id: '4',
-    source: require('../../assets/zupa_szpinakowa.jpg'),
-  },
-  {
-    id: '5',
-    source: require('../../assets/zupa_szpinakowa.jpg'),
-  },
-  {
-    id: '6',
-    source: require('../../assets/zupa_szpinakowa.jpg'),
-  },
-  {
-    id: '7',
-    source: require('../../assets/zupa_szpinakowa.jpg'),
-  },
-  {
-    id: '8',
-    source: require('../../assets/zupa_szpinakowa.jpg'),
-  },
-  {
-    id: '9',
-    source: require('../../assets/zupa_szpinakowa.jpg'),
-  },
-];
+const ImagesGrid = ({ data, onImageChange }) => {
+  const dispatch = useDispatch();
 
-const ImagesGrid = () => {
-  const imageSize = [];
+  const pickImage = async (index) => {
+    await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    }).then(
+      (r) => !r.cancelled && dispatch(setPicture({ id: index, uri: r.uri }))
+    );
+  };
+
   return (
     <View style={styles.wrapper}>
-      {images.map((item) => (
-        <View key={item.id} style={styles.item}>
-          <FitImage source={item.source} style={styles.image} />
-        </View>
+      {data.map((item, i) => (
+        <TouchableWithoutFeedback key={i} onPress={() => pickImage(i)}>
+          <View style={styles.item}>
+            {item != '' ? (
+              <FitImage source={{ uri: item }} style={styles.image} />
+            ) : (
+              <FontAwesomeIcon
+                icon={faPlus}
+                size={50}
+                color="white"
+                style={{ marginTop: 50 }}
+              />
+            )}
+          </View>
+        </TouchableWithoutFeedback>
       ))}
     </View>
   );
@@ -66,12 +54,15 @@ const styles = StyleSheet.create({
   item: {
     borderWidth: 1,
     borderColor: Colors.darkGarlic,
-    width: '30%',
+    width: '48%',
     height: 0,
-    paddingBottom: '30%',
+    paddingBottom: '48%',
     overflow: 'hidden',
     borderRadius: 20,
     marginBottom: 10,
+    backgroundColor: Colors.salt,
+    alignItems: 'center',
+    position: 'relative',
   },
   image: {
     width: '100%',

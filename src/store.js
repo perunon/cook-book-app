@@ -3,6 +3,7 @@ import stepOneReducer from './slices/StepOneSlice';
 import stepTwoReducer from './slices/StepTwoSlice';
 import stepThreeReducer from './slices/StepThreeSlice';
 import stepFourReducer from './slices/StepFourSlice';
+import stepFiveReducer from './slices/StepFiveSlice';
 import tagsReducer from './slices/TagsSlice';
 
 export const store = configureStore({
@@ -11,6 +12,7 @@ export const store = configureStore({
     stepTwo: stepTwoReducer,
     stepThree: stepThreeReducer,
     stepFour: stepFourReducer,
+    stepFive: stepFiveReducer,
     tags: tagsReducer,
   },
 });

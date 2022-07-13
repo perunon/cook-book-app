@@ -1,18 +1,20 @@
-import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text } from 'react-native';
+import { setPicture } from '../../slices/StepFiveSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../components/Button';
 import ImagesGrid from '../../components/ImagesGrid';
 import ScreenContainer from '../../components/ScreenContainer';
 import ScreenTitle from '../../components/ScreenTitle';
 import { Colors, Typography } from '../../styles';
 
-const StepFive = () => {
-  const navigation = useNavigation();
+const StepFive = ({ navigation }) => {
+  const pictures = useSelector((state) => state.stepFive.pictures);
+
   return (
     <ScreenContainer>
       <ScreenTitle text="You're almost there! Let's add some pictures of your dish and we are ready to serve!" />
-      <ImagesGrid />
+      <ImagesGrid data={pictures} onImageChange={(val) => setImage(val)} />
       <Text style={styles.bottomText}>
         Congratulations! Your recipe is ready to save. Check the{' '}
         <Text
