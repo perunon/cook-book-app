@@ -1,9 +1,30 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Colors, Typography } from '../styles';
 
-const TagItem = ({ data }) => {
-  return <Text style={styles.tagItem}>{data.name}</Text>;
+const TagItem = ({ data, toggleSelected, deleteItem, active = false }) => {
+  return (
+    <TouchableOpacity
+      onPress={() => toggleSelected(data)}
+      onLongPress={() => {
+        active && toggleSelected(data);
+        deleteItem(data);
+      }}
+    >
+      <Text
+        style={[
+          styles.tagItem,
+          active && {
+            backgroundColor: Colors.olive,
+            color: 'white',
+            borderColor: Colors.olive,
+          },
+        ]}
+      >
+        {data}
+      </Text>
+    </TouchableOpacity>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -17,6 +38,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
     marginBottom: 10,
+    marginRight: 10,
     borderRadius: 20,
   },
 });

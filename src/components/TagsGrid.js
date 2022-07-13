@@ -2,31 +2,22 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { Colors, Typography } from '../styles';
 import TagItem from './TagItem';
+import { useSelector } from 'react-redux';
 
-const tags = [
-  {
-    id: '1',
-    name: 'Soup',
-  },
-  {
-    id: '2',
-    name: 'For Family',
-  },
-  {
-    id: '3',
-    name: 'Vegetarian',
-  },
-  {
-    id: '4',
-    name: 'Spinach',
-  },
-];
+const TagsGrid = ({ data, onTagSelect, onLongPress }) => {
+  const tags = useSelector((state) => state.stepFour.tags);
 
-const TagsGrid = () => {
   return (
     <View style={styles.container}>
-      {tags.map((item) => (
-        <TagItem key={item.id} data={item} />
+      {data.map((item, i) => (
+        <TagItem
+          key={i}
+          data={item}
+          index={i}
+          toggleSelected={onTagSelect}
+          deleteItem={onLongPress}
+          active={tags.includes(item)}
+        />
       ))}
     </View>
   );
@@ -37,7 +28,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
     marginVertical: 10,
   },
 });
