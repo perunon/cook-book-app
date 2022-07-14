@@ -18,9 +18,9 @@ import StepFive from './src/screens/AddRecipe/StepFive';
 import AddNewStep from './src/screens/AddRecipe/AddNewStep';
 import EditStep from './src/screens/AddRecipe/EditStep';
 import BrowseRecipes from './src/screens/BrowseRecipes';
-import Recipe from './src/screens/Recipe';
 import { Provider } from 'react-redux';
 import { store } from './src/store';
+import RecipeStack from './src/screens/RecipeStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -91,12 +91,12 @@ export default function App() {
               <Stack.Screen
                 name="BrowseRecipes"
                 component={BrowseRecipes}
-                options={{ title: 'Browse Recipes' }}
+                options={{ title: 'Browse Recipes', headerShown: false }}
               />
               <Stack.Screen
-                name="Recipe"
-                component={Recipe}
-                options={{ title: 'Recipe' }}
+                name="RecipeStack"
+                component={RecipeStack}
+                options={{ headerShown: false }}
               />
             </Stack.Group>
           </Stack.Navigator>

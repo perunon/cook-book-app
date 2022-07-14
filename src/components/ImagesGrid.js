@@ -14,7 +14,7 @@ const ImagesGrid = ({ data, onImageChange }) => {
     await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [16, 9],
       quality: 1,
     }).then(
       (r) => !r.cancelled && dispatch(setPicture({ id: index, uri: r.uri }))
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 100,
+    height: 160,
   },
 });
 

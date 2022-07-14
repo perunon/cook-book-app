@@ -1,23 +1,35 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Button from '../components/Button';
+import NextStep from '../components/NextStep';
 import ScreenContainer from '../components/ScreenContainer';
 import ScreenTitle from '../components/ScreenTitle';
 import TitleImage from '../components/TitleImage';
 import { Typography } from '../styles';
 
-const RecipeStep = () => {
+const RecipeStep = ({ route, navigation }) => {
+  const { imgUri, content, notes } = route.params.step;
+  const isLast = route.params.isLast;
+  const index = route.params.index;
+
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
-      <TitleImage />
+      {imgUri != '' && <TitleImage source={imgUri} />}
       <ScreenContainer>
-        <ScreenTitle text="Zalać bulionem, zagotować, zmniejszyć ogień i gotować przez 15 minut na małym ogniu." />
+        <ScreenTitle text={content} />
         <View style={styles.bottom}>
           <Text style={styles.notesTitle}>Notes:</Text>
-          <Text style={styles.notes}>
-            Zagotować na "P". Zmniejszyć ogień na poziom 5.
-          </Text>
-          <Button title="FINISH COOKING" />
+          <Text style={styles.notes}>{notes}</Text>
+          {isLast ? (
+            <Button
+              title="FINISH COOKING"
+              onClick={() =>
+                navigation.reset({ index: 0, routes: [{ name: 'Recipe' }] })
+              }
+            />
+          ) : (
+            <NextStep target={`${index + 1}`} />
+          )}
         </View>
       </ScreenContainer>
     </View>

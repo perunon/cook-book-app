@@ -7,7 +7,7 @@ import TitleImage from '../components/TitleImage';
 import { Colors, Typography } from '../styles';
 
 const Recipe = ({ route, navigation }) => {
-  const recipe = route.params.recipe;
+  const recipe = route.params.data;
 
   const renderItem = ({ item }) => (
     <Text style={styles.ingredientsItem}>{item.name}</Text>
@@ -21,7 +21,7 @@ const Recipe = ({ route, navigation }) => {
 
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
-      <TitleImage />
+      <TitleImage source={recipe.pictures[0]} />
       <ScreenContainer>
         <Text style={styles.title}>{recipe.name}</Text>
         <Text style={styles.details}>
@@ -44,7 +44,7 @@ const Recipe = ({ route, navigation }) => {
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
         />
-        <Button title="GO TO RECIPE" />
+        <Button title="GO TO RECIPE" onClick={() => navigation.push('0')} />
         <Text style={styles.tagsTitle}>Tags:</Text>
         <Text style={styles.tagsList}>{renderTags()}</Text>
         {route.params.preview && (

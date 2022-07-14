@@ -25,7 +25,6 @@ const StepFive = ({ navigation }) => {
     ...stepFour,
     ...stepFive,
   };
-  console.log(recipe);
 
   return (
     <ScreenContainer>
@@ -36,7 +35,7 @@ const StepFive = ({ navigation }) => {
         <Text
           style={styles.greenBottomText}
           onPress={() =>
-            navigation.push('Recipe', { preview: true, recipe: recipe })
+            navigation.push('RecipeStack', { preview: true, data: recipe })
           }
         >
           preview{' '}
