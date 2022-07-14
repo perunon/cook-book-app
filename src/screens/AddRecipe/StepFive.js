@@ -1,15 +1,31 @@
-import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
-import { setPicture } from '../../slices/StepFiveSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../components/Button';
 import ImagesGrid from '../../components/ImagesGrid';
 import ScreenContainer from '../../components/ScreenContainer';
 import ScreenTitle from '../../components/ScreenTitle';
+import { addNewRecipe } from '../../slices/RecipesSlice';
 import { Colors, Typography } from '../../styles';
 
 const StepFive = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   const pictures = useSelector((state) => state.stepFive.pictures);
+
+  const stepOne = useSelector((state) => state.stepOne);
+  const stepTwo = useSelector((state) => state.stepTwo);
+  const stepThree = useSelector((state) => state.stepThree);
+  const stepFour = useSelector((state) => state.stepFour);
+  const stepFive = useSelector((state) => state.stepFive);
+
+  const recipe = {
+    ...stepOne,
+    ...stepTwo,
+    ...stepThree,
+    ...stepFour,
+    ...stepFive,
+  };
+  console.log(recipe);
 
   return (
     <ScreenContainer>
@@ -19,7 +35,9 @@ const StepFive = ({ navigation }) => {
         Congratulations! Your recipe is ready to save. Check the{' '}
         <Text
           style={styles.greenBottomText}
-          onPress={() => navigation.push('Recipe', { preview: true })}
+          onPress={() =>
+            navigation.push('Recipe', { preview: true, recipe: recipe })
+          }
         >
           preview{' '}
         </Text>
@@ -27,7 +45,10 @@ const StepFive = ({ navigation }) => {
       </Text>
       <Button
         title="FINISH"
-        onClick={() => navigation.navigate('BrowseRecipes')}
+        onClick={() => {
+          dispatch(addNewRecipe(recipe));
+          navigation.reset({ index: 0, routes: [{ name: 'BrowseRecipes' }] });
+        }}
       />
     </ScreenContainer>
   );

@@ -5,6 +5,7 @@ import stepThreeReducer from './slices/StepThreeSlice';
 import stepFourReducer from './slices/StepFourSlice';
 import stepFiveReducer from './slices/StepFiveSlice';
 import tagsReducer from './slices/TagsSlice';
+import recipesReducer from './slices/RecipesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     stepFour: stepFourReducer,
     stepFive: stepFiveReducer,
     tags: tagsReducer,
+    recipes: recipesReducer,
   },
 });

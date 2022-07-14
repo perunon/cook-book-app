@@ -1,52 +1,36 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { useSelector } from 'react-redux';
 import Button from '../components/Button';
 import ScreenContainer from '../components/ScreenContainer';
 import TitleImage from '../components/TitleImage';
 import { Colors, Typography } from '../styles';
 
-const ingredients = [
-  {
-    id: '1',
-    name: 'Milk: 400ml',
-  },
-  {
-    id: '2',
-    name: 'Milk: 400ml',
-  },
-  {
-    id: '3',
-    name: 'Milk: 400ml',
-  },
-  {
-    id: '4',
-    name: 'Milk: 400ml',
-  },
-  {
-    id: '5',
-    name: 'Milk: 400ml',
-  },
-  {
-    id: '6',
-    name: 'Milk: 400ml',
-  },
-];
+const Recipe = ({ route, navigation }) => {
+  const recipe = route.params.recipe;
 
-const Recipe = ({ route }) => {
   const renderItem = ({ item }) => (
     <Text style={styles.ingredientsItem}>{item.name}</Text>
   );
+
+  const renderTags = () => {
+    let tagList = '';
+    recipe.tags.map((tag) => (tagList += `#${tag} `));
+    return <Text>{tagList}</Text>;
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
       <TitleImage />
       <ScreenContainer>
-        <Text style={styles.title}>Zupa krem szpinakowa</Text>
-        <Text style={styles.details}>15min | 30min</Text>
+        <Text style={styles.title}>{recipe.name}</Text>
+        <Text style={styles.details}>
+          {recipe.prepTime} | {recipe.cookTime}
+        </Text>
 
         <View style={styles.nextSection}>
           <Text style={styles.ingredients}>
-            Ingredients for 400g / 2 people
+            Ingredients for {recipe.recipeFor}
           </Text>
 
           <View style={styles.quantity}>
@@ -56,19 +40,18 @@ const Recipe = ({ route }) => {
           </View>
         </View>
         <FlatList
-          data={ingredients}
+          data={recipe.ingredients}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
         />
         <Button title="GO TO RECIPE" />
         <Text style={styles.tagsTitle}>Tags:</Text>
-        <Text style={styles.tagsList}>
-          #soup #for-family #vegetarian #spinach
-        </Text>
+        <Text style={styles.tagsList}>{renderTags()}</Text>
         {route.params.preview && (
           <Button
             title="RETURN TO SUMMARY"
             style={{ backgroundColor: Colors.garlic }}
+            onClick={() => navigation.goBack()}
           ></Button>
         )}
       </ScreenContainer>

@@ -8,14 +8,14 @@ import { Typography } from '../styles';
 const BrowseRecipes = () => {
   return (
     <ScreenContainer>
-      <View>
+      {/* <View>
         <SingleLineInput size={26} placeholder="Search for a recipe..." />
         <View style={styles.inline}>
           <Text style={styles.option}>Select tags</Text>
           <Text style={styles.option}>Sort by: Recently</Text>
         </View>
         <TagsGrid />
-      </View>
+      </View> */}
       <ScrollView style={{ marginTop: 30 }}>
         <RecipesList />
       </ScrollView>

@@ -8,10 +8,12 @@ const RecipesListItem = ({ data }) => {
   const navigation = useNavigation();
   return (
     <TouchableWithoutFeedback
-      onPress={() => navigation.navigate('Recipe', { preview: false })}
+      onPress={() =>
+        navigation.navigate('Recipe', { preview: false, recipe: data })
+      }
     >
       <View style={styles.listItem}>
-        <FitImage source={data.img} style={styles.image} />
+        <FitImage source={{ uri: data.pictures[0] }} style={styles.image} />
         <LinearGradient
           colors={['black', 'transparent']}
           start={{ x: 0.5, y: 1 }}
