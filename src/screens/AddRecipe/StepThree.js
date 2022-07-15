@@ -4,9 +4,8 @@ import ScreenTitle from '../../components/ScreenTitle';
 import StepsList from '../../components/StepsList';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteStep } from '../../slices/StepThreeSlice';
-import Button from '../../components/Button';
 
-const StepThree = ({ navigation }) => {
+const StepThree = ({ route }) => {
   const steps = useSelector((state) => state.stepThree.steps);
   const dispatch = useDispatch();
 
@@ -17,8 +16,8 @@ const StepThree = ({ navigation }) => {
         data={steps}
         onStepEdit={(index) => dispatch(editStep(index))}
         onStepDelete={(index) => dispatch(deleteStep(index))}
+        screen={route.name}
       />
-      <Button title="ADD STEP" onClick={() => navigation.push('AddNewStep')} />
       <NextStep target="StepFour" />
     </ScreenContainer>
   );

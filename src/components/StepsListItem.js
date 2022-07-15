@@ -6,8 +6,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import FitImage from 'react-native-fit-image';
 import { Colors, Typography } from '../styles';
 
-const StepsListItem = ({ data, index, onDeletePress }) => {
-  const navigation = useNavigation();
+const StepsListItem = ({ data, index, onDeletePress, onEditPress }) => {
   return (
     <View style={styles.wrapper}>
       {data.imgUri != '' && (
@@ -15,9 +14,7 @@ const StepsListItem = ({ data, index, onDeletePress }) => {
       )}
       <Text style={styles.text}>{data.content}</Text>
       <View style={styles.actionIcons}>
-        <TouchableOpacity
-          onPress={() => navigation.push('EditStep', { index: index })}
-        >
+        <TouchableOpacity onPress={onEditPress}>
           <FontAwesomeIcon icon={faPencil} size={20} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => onDeletePress(index)}>

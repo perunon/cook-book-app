@@ -4,19 +4,19 @@ import { Colors, Typography } from '../styles';
 import TagItem from './TagItem';
 import { useSelector } from 'react-redux';
 
-const TagsGrid = ({ data, onTagSelect, onLongPress }) => {
-  const tags = useSelector((state) => state.stepFour.tags);
+const TagsGrid = ({ data, onTagSelect, onLongPress = () => {} }) => {
+  const tags = useSelector((state) => state.tags.tags);
 
   return (
     <View style={styles.container}>
-      {data.map((item, i) => (
+      {tags.map((item, i) => (
         <TagItem
           key={i}
           data={item}
           index={i}
           toggleSelected={onTagSelect}
           deleteItem={onLongPress}
-          active={tags.includes(item)}
+          active={data.includes(item)}
         />
       ))}
     </View>

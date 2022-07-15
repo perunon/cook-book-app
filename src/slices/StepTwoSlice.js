@@ -2,12 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   recipeFor: '',
-  ingredients: [
-    {
-      name: 'Mleko',
-      quantity: '400 ml',
-    },
-  ],
+  ingredients: [],
 };
 
 export const stepTwoSlice = createSlice({

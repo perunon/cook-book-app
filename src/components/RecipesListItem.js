@@ -11,7 +11,6 @@ const RecipesListItem = ({ data, index }) => {
       onPress={() =>
         navigation.navigate('RecipeStack', {
           preview: false,
-          data: data,
           index: index,
         })
       }

@@ -4,11 +4,12 @@ import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import FitImage from 'react-native-fit-image';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '../styles';
-import { useDispatch } from 'react-redux';
-import { setPicture } from '../slices/StepFiveSlice';
+import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
-const ImagesGrid = ({ data, onImageChange }) => {
-  const dispatch = useDispatch();
+const ImagesGrid = ({ data, screen }) => {
+  const navigation = useNavigation();
+  const [images, setImages] = useState(data);
 
   const pickImage = async (index) => {
     await ImagePicker.launchImageLibraryAsync({
@@ -16,9 +17,16 @@ const ImagesGrid = ({ data, onImageChange }) => {
       allowsEditing: true,
       aspect: [16, 9],
       quality: 1,
-    }).then(
-      (r) => !r.cancelled && dispatch(setPicture({ id: index, uri: r.uri }))
-    );
+    }).then((r) => {
+      if (!r.cancelled) {
+      }
+      const newImages = images.map((image, i) => {
+        if (i != index) return image;
+        return r.uri;
+      });
+      setImages(newImages);
+      navigation.navigate(screen, { newImages: newImages });
+    });
   };
 
   return (

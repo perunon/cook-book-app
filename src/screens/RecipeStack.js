@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useSelector } from 'react-redux';
 import EditRecipeButton from '../components/EditRecipeButton';
 import HeaderBar from '../components/HeaderBar';
 import NextStep from '../components/NextStep';
@@ -9,7 +10,8 @@ import RecipeStep from './RecipeStep';
 const Steps = createNativeStackNavigator();
 
 const RecipeStack = ({ route }) => {
-  const { data, preview, index } = route.params;
+  const { preview, index } = route.params;
+  const data = useSelector((state) => state.recipes.recipes)[index];
 
   return (
     <Steps.Navigator

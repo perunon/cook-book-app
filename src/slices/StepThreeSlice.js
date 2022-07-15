@@ -1,11 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  steps: [
-    { imgUri: '', content: 'Step 1', notes: 'Step 1' },
-    { imgUri: '', content: 'Step 2', notes: 'Step 2' },
-    { imgUri: '', content: 'Step 3', notes: 'Step 3' },
-  ],
+  steps: [],
 };
 
 export const stepThreeSlice = createSlice({

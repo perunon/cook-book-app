@@ -4,21 +4,11 @@ import Button from '../../components/Button';
 import ScreenContainer from '../../components/ScreenContainer';
 import TextArea from '../../components/TextArea';
 import TitleImage from '../../components/TitleImage';
-import { useDispatch, useSelector } from 'react-redux';
-import { editStep } from '../../slices/StepThreeSlice';
 
 const EditStep = ({ route, navigation }) => {
-  const index = route.params.index;
-  const { imgUri, content, notes } = useSelector(
-    (state) => state.stepThree.steps[index]
-  );
-  const dispatch = useDispatch();
+  const { data, index, prevScreen } = route.params;
 
-  const [editedStep, setEditedStep] = useState({
-    imgUri: imgUri,
-    content: content,
-    notes: notes,
-  });
+  const [editedStep, setEditedStep] = useState(data);
 
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
@@ -44,8 +34,9 @@ const EditStep = ({ route, navigation }) => {
         <Button
           title="SAVE"
           onClick={() => {
-            dispatch(editStep({ editedStep, index }));
-            navigation.goBack();
+            navigation.navigate(prevScreen, {
+              editedStep: { data: editedStep, index: index },
+            });
           }}
         />
       </ScreenContainer>

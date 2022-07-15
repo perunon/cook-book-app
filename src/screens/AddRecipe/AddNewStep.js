@@ -4,11 +4,9 @@ import Button from '../../components/Button';
 import ScreenContainer from '../../components/ScreenContainer';
 import TextArea from '../../components/TextArea';
 import TitleImage from '../../components/TitleImage';
-import { useDispatch } from 'react-redux';
-import { addStep } from '../../slices/StepThreeSlice';
 
-const AddNewStep = ({ navigation }) => {
-  const dispatch = useDispatch();
+const AddNewStep = ({ navigation, route }) => {
+  const { prevScreen } = route.params;
   const [newStep, setNewStep] = useState({
     imgUri: '',
     content: '',
@@ -38,8 +36,7 @@ const AddNewStep = ({ navigation }) => {
         <Button
           title="SAVE"
           onClick={() => {
-            dispatch(addStep(newStep));
-            navigation.goBack();
+            navigation.navigate(prevScreen, { newStep: newStep });
           }}
         />
       </ScreenContainer>

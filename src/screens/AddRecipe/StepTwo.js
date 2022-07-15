@@ -5,16 +5,13 @@ import ScreenTitle from '../../components/ScreenTitle';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setRecipeFor,
-  addIngredient,
   removeEmptyIngredients,
   updateIngredient,
   removeIngredient,
+  addIngredient,
 } from '../../slices/StepTwoSlice';
 import IngredientsList from '../../components/IngredientsList';
-import Button from '../../components/Button';
 import { useEffect } from 'react';
-import { StyleSheet, Text } from 'react-native';
-import { Colors, Typography } from '../../styles';
 
 const StepTwo = ({ navigation }) => {
   const { recipeFor, ingredients } = useSelector((state) => state.stepTwo);
@@ -37,26 +34,19 @@ const StepTwo = ({ navigation }) => {
         value={recipeFor}
         onChange={(val) => dispatch(setRecipeFor(val))}
       />
-      <Text style={styles.listTitle}>Ingredients:</Text>
+
       <IngredientsList
         data={ingredients}
         onChange={(index, field, val) =>
           dispatch(updateIngredient({ index, field, val }))
         }
         onIngredientDelete={(index) => dispatch(removeIngredient(index))}
+        onAddIngredient={() => dispatch(addIngredient())}
       />
-      <Button title="ADD" onClick={() => dispatch(addIngredient())} />
+
       <NextStep target="StepThree" />
     </ScreenContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  listTitle: {
-    ...Typography.semibold,
-    fontSize: 16,
-    color: Colors.pepper,
-  },
-});
 
 export default StepTwo;
