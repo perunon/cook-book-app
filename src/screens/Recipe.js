@@ -1,5 +1,12 @@
-import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import { useSelector } from 'react-redux';
 import Button from '../components/Button';
 import ScreenContainer from '../components/ScreenContainer';
@@ -8,15 +15,26 @@ import { Colors, Typography } from '../styles';
 
 const Recipe = ({ route, navigation }) => {
   const recipe = route.params.data;
-
-  const renderItem = ({ item }) => (
-    <Text style={styles.ingredientsItem}>{item.name}</Text>
-  );
+  const [ingredients, setIngredients] = useState(recipe.ingredients);
+  const [activeQuantity, setActiveQuantity] = useState(1);
 
   const renderTags = () => {
     let tagList = '';
     recipe.tags.map((tag) => (tagList += `#${tag} `));
     return <Text>{tagList}</Text>;
+  };
+
+  const changeQuantity = (multiplier) => {
+    const newIngredients = recipe.ingredients.map((item) => {
+      return {
+        name: item.name,
+        quantity: `${
+          parseInt(item.quantity.split(' ')[0]) * multiplier
+        } ${item.quantity.substring(item.quantity.indexOf(' ') + 1)}`,
+      };
+    });
+    setIngredients(newIngredients);
+    setActiveQuantity(multiplier);
   };
 
   return (
@@ -34,16 +52,43 @@ const Recipe = ({ route, navigation }) => {
           </Text>
 
           <View style={styles.quantity}>
-            <Text style={[styles.quantityButton, styles.first]}>1x</Text>
-            <Text style={styles.quantityButton}>2x</Text>
-            <Text style={[styles.quantityButton, styles.last]}>3x</Text>
+            <TouchableOpacity
+              style={[
+                styles.quantityButton,
+                activeQuantity === 1 && styles.active,
+              ]}
+              onPress={() => changeQuantity(1)}
+            >
+              <Text style={styles.quantityButtonText}>1x</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.quantityButton,
+                activeQuantity === 2 && styles.active,
+              ]}
+              onPress={() => changeQuantity(2)}
+            >
+              <Text style={styles.quantityButtonText}>2x</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.quantityButton,
+                styles.last,
+                activeQuantity === 3 && styles.active,
+              ]}
+              onPress={() => changeQuantity(3)}
+            >
+              <Text style={styles.quantityButtonText}>3x</Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <FlatList
-          data={recipe.ingredients}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-        />
+        <ScrollView>
+          {ingredients.map((item, i) => (
+            <Text key={i} style={styles.ingredientsItem}>
+              {item.name}: {item.quantity}
+            </Text>
+          ))}
+        </ScrollView>
         <Button title="GO TO RECIPE" onClick={() => navigation.push('0')} />
         <Text style={styles.tagsTitle}>Tags:</Text>
         <Text style={styles.tagsList}>{renderTags()}</Text>
@@ -93,15 +138,17 @@ const styles = StyleSheet.create({
     height: '100%',
     flex: 1,
     borderRightWidth: 1,
-    textAlign: 'center',
     textAlignVertical: 'center',
+  },
+  quantityButtonText: {
+    textAlign: 'center',
     fontSize: 20,
     ...Typography.regular,
   },
   last: {
     borderRightWidth: 0,
   },
-  first: {
+  active: {
     backgroundColor: Colors.olive,
   },
   ingredientsItem: {

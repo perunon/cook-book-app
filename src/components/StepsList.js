@@ -1,13 +1,12 @@
 import { StyleSheet, ScrollView } from 'react-native';
 import StepsListItem from './StepsListItem';
-const StepsList = ({ data, onStepEdit, onStepDelete }) => {
+const StepsList = ({ data, onStepDelete }) => {
   return (
     <ScrollView style={styles.wrapper}>
       {data.map((item, index) => (
         <StepsListItem
           data={item}
           key={index}
-          onEditPress={onStepEdit}
           index={index}
           onDeletePress={onStepDelete}
         />

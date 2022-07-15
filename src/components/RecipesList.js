@@ -4,12 +4,11 @@ import RecipesListItem from './RecipesListItem';
 
 const RecipesList = () => {
   const { recipes } = useSelector((state) => state.recipes);
-  console.log(recipes);
 
   return (
     <View style={styles.recipesList}>
       {recipes.map((item, i) => (
-        <RecipesListItem data={item} key={i} />
+        <RecipesListItem data={item} key={i} index={i} />
       ))}
     </View>
   );

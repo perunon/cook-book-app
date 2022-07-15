@@ -4,12 +4,16 @@ import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import FitImage from 'react-native-fit-image';
 import { Typography } from '../styles';
 
-const RecipesListItem = ({ data }) => {
+const RecipesListItem = ({ data, index }) => {
   const navigation = useNavigation();
   return (
     <TouchableWithoutFeedback
       onPress={() =>
-        navigation.navigate('Recipe', { preview: false, recipe: data })
+        navigation.navigate('RecipeStack', {
+          preview: false,
+          data: data,
+          index: index,
+        })
       }
     >
       <View style={styles.listItem}>

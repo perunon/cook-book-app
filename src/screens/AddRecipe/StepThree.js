@@ -3,7 +3,7 @@ import ScreenContainer from '../../components/ScreenContainer';
 import ScreenTitle from '../../components/ScreenTitle';
 import StepsList from '../../components/StepsList';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteStep, addStep } from '../../slices/StepThreeSlice';
+import { deleteStep } from '../../slices/StepThreeSlice';
 import Button from '../../components/Button';
 
 const StepThree = ({ navigation }) => {
