@@ -16,10 +16,10 @@ export const stepThreeSlice = createSlice({
       });
     },
     editStep: (state, action) => {
-      const { editedStep, index } = action.payload;
+      const { data, index } = action.payload;
       state.steps = state.steps.map((step, i) => {
         if (i !== index) return step;
-        return editedStep;
+        return data;
       });
     },
     deleteStep: (state, action) => {

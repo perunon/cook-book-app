@@ -4,29 +4,24 @@ import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import FitImage from 'react-native-fit-image';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '../styles';
-import { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPicture } from '../slices/StepFiveSlice';
 
-const ImagesGrid = ({ data, screen }) => {
-  const navigation = useNavigation();
-  const [images, setImages] = useState(data);
+const ImagesGrid = () => {
+  const data = useSelector((state) => state.stepFive.pictures);
+  const dispatch = useDispatch();
 
   const pickImage = async (index) => {
-    await ImagePicker.launchImageLibraryAsync({
+    let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [16, 9],
       quality: 1,
-    }).then((r) => {
-      if (!r.cancelled) {
-      }
-      const newImages = images.map((image, i) => {
-        if (i != index) return image;
-        return r.uri;
-      });
-      setImages(newImages);
-      navigation.navigate(screen, { newImages: newImages });
     });
+
+    if (!result.cancelled) {
+      dispatch(setPicture({ id: index, uri: result.uri }));
+    }
   };
 
   return (

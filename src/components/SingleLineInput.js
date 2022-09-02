@@ -2,12 +2,25 @@ import React from 'react';
 import { StyleSheet, TextInput, Text, View } from 'react-native';
 import { Typography, Colors } from '../styles';
 
-const SingleLineInput = ({ size, placeholder, label, onChange, value }) => {
+const SingleLineInput = ({
+  size,
+  placeholder,
+  label,
+  onChange,
+  value,
+  validated = true,
+}) => {
   return (
     <View>
       {label && <Text style={[styles.label, label.size]}>{label.text}</Text>}
       <TextInput
-        style={[styles.input, { fontSize: size }]}
+        style={[
+          styles.input,
+          { fontSize: size },
+          !validated
+            ? { borderBottomColor: Colors.paprika }
+            : { borderBottomColor: Colors.olive },
+        ]}
         placeholder={placeholder}
         onChangeText={(value) => onChange(value)}
         value={value}

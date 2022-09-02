@@ -7,10 +7,8 @@ import ScreenTitle from '../../components/ScreenTitle';
 import { addNewRecipe } from '../../slices/RecipesSlice';
 import { Colors, Typography } from '../../styles';
 
-const StepFive = ({ navigation }) => {
+const StepFive = ({ navigation, route }) => {
   const dispatch = useDispatch();
-
-  const pictures = useSelector((state) => state.stepFive.pictures);
 
   const stepOne = useSelector((state) => state.stepOne);
   const stepTwo = useSelector((state) => state.stepTwo);
@@ -29,7 +27,7 @@ const StepFive = ({ navigation }) => {
   return (
     <ScreenContainer>
       <ScreenTitle text="You're almost there! Let's add some pictures of your dish and we are ready to serve!" />
-      <ImagesGrid data={pictures} onImageChange={(val) => setImage(val)} />
+      <ImagesGrid />
       <Text style={styles.bottomText}>
         Congratulations! Your recipe is ready to save. Check the{' '}
         <Text

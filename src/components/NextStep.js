@@ -5,10 +5,19 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../styles';
 import { useNavigation } from '@react-navigation/native';
 
-const NextStep = ({ target }) => {
+const NextStep = ({
+  target,
+  validate = () => {
+    return true;
+  },
+}) => {
   const navigation = useNavigation();
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(target)}>
+    <TouchableOpacity
+      onPress={() => {
+        validate() && navigation.navigate(target);
+      }}
+    >
       <View style={styles.wrapper}>
         <FontAwesomeIcon style={styles.icon} icon={faChevronRight} size={30} />
       </View>

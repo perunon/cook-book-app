@@ -1,22 +1,21 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
-import { Colors, Typography } from '../styles';
+import { StyleSheet, View } from 'react-native';
 import TagItem from './TagItem';
 import { useSelector } from 'react-redux';
 
 const TagsGrid = ({ data, onTagSelect, onLongPress = () => {} }) => {
-  const tags = useSelector((state) => state.tags.tags);
+  const tags = useSelector((state) => state.stepFour.tags);
 
   return (
     <View style={styles.container}>
-      {tags.map((item, i) => (
+      {data.map((item, i) => (
         <TagItem
           key={i}
           data={item}
           index={i}
           toggleSelected={onTagSelect}
           deleteItem={onLongPress}
-          active={data.includes(item)}
+          active={tags.includes(item)}
         />
       ))}
     </View>

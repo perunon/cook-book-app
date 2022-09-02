@@ -11,7 +11,9 @@ const Steps = createNativeStackNavigator();
 
 const RecipeStack = ({ route }) => {
   const { preview, index } = route.params;
-  const data = useSelector((state) => state.recipes.recipes)[index];
+  const data = preview
+    ? route.params.data
+    : useSelector((state) => state.recipes.recipes)[index];
 
   return (
     <Steps.Navigator

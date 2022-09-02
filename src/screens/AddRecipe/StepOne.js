@@ -12,12 +12,39 @@ import {
   setPrepTime,
   setSource,
 } from '../../slices/StepOneSlice';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
 const StepOne = () => {
+  const [validated, setValidated] = useState(true);
+  const isMounted = useRef(false);
   const { name, description, prepTime, cookTime, source } = useSelector(
     (state) => state.stepOne
   );
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isMounted.current) {
+      if (name === '') {
+        setValidated(false);
+      } else {
+        setValidated(true);
+      }
+    } else {
+      isMounted.current = true;
+    }
+  }, [name]);
+
+  const validate = () => {
+    if (name === '') {
+      setValidated(false);
+      return false;
+    } else {
+      setValidated(true);
+      return true;
+    }
+  };
 
   return (
     <ScreenContainer>
@@ -28,6 +55,7 @@ const StepOne = () => {
         placeholder="Enter recipe name..."
         value={name}
         onChange={(val) => dispatch(setName(val))}
+        validated={validated}
       />
 
       <TextArea
@@ -59,7 +87,7 @@ const StepOne = () => {
         onChange={(val) => dispatch(setSource(val))}
       />
 
-      <NextStep target="StepTwo" />
+      <NextStep target="StepTwo" validate={() => validate()} />
     </ScreenContainer>
   );
 };

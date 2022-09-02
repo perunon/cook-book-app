@@ -25,6 +25,10 @@ const StepTwo = ({ navigation }) => {
     return unsubscribe;
   }, [navigation]);
 
+  const validate = () => {
+    return ingredients.length != 0;
+  };
+
   return (
     <ScreenContainer>
       <ScreenTitle text="Fill required information and list ingredients for your recipe." />
@@ -44,7 +48,7 @@ const StepTwo = ({ navigation }) => {
         onAddIngredient={() => dispatch(addIngredient())}
       />
 
-      <NextStep target="StepThree" />
+      <NextStep target="StepThree" validate={() => validate()} />
     </ScreenContainer>
   );
 };

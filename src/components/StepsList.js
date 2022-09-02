@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, ScrollView } from 'react-native';
 import Button from './Button';
 import StepsListItem from './StepsListItem';
+
 const StepsList = ({ data, onStepDelete, screen }) => {
   const navigation = useNavigation();
   return (
