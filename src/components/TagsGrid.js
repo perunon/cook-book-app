@@ -13,7 +13,7 @@ const TagsGrid = ({ data, onTagSelect, onLongPress = () => {} }) => {
           key={i}
           data={item}
           index={i}
-          toggleSelected={onTagSelect}
+          toggleSelected={onTagSelect(item)}
           deleteItem={onLongPress}
           active={tags.includes(item)}
         />

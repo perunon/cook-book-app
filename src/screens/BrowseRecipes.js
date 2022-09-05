@@ -1,25 +1,76 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import { useSelector } from 'react-redux';
+import BrowseRecipesTagsList from '../components/BrowseRecipesTagList';
 import RecipesList from '../components/RecipesList';
 import ScreenContainer from '../components/ScreenContainer';
 import SingleLineInput from '../components/SingleLineInput';
 import Tabs from '../components/Tabs';
-import TagsGrid from '../components/TagsGrid';
 import { Typography } from '../styles';
 
 const BrowseRecipes = () => {
+  const [areTagsShown, setAreTagsShown] = useState(false);
+  const [input, setInput] = useState('');
+  const { tags } = useSelector((state) => state.tags);
+  const [activeTags, setActiveTags] = useState([]);
+
+  const toggleTags = () => {
+    setAreTagsShown(!areTagsShown);
+  };
+
+  const filterList = (tagName) => {
+    if (!activeTags.includes(tagName)) {
+      setActiveTags([...activeTags, tagName]);
+    } else {
+      setActiveTags(
+        activeTags.filter((item) => {
+          return item !== tagName;
+        })
+      );
+    }
+  };
+
   return (
     <>
       <ScreenContainer>
-        {/* <View>
-        <SingleLineInput size={26} placeholder="Search for a recipe..." />
-        <View style={styles.inline}>
-          <Text style={styles.option}>Select tags</Text>
-          <Text style={styles.option}>Sort by: Recently</Text>
+        <View style={{ marginTop: 30, marginBottom: 10 }}>
+          <SingleLineInput
+            size={26}
+            placeholder="Search for a recipe..."
+            value={input}
+            onChange={(val) => {
+              setInput(val);
+            }}
+          />
+          <View style={styles.inline}>
+            <TouchableOpacity
+              style={styles.option}
+              onPress={() => toggleTags()}
+            >
+              <Text style={styles.optionText}>Select tags</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.option}>
+              <Text style={styles.optionText}>Sort by: Recently</Text>
+            </TouchableOpacity>
+          </View>
+          {areTagsShown && (
+            <View style={styles.tagList}>
+              <BrowseRecipesTagsList
+                tags={tags}
+                selectedTags={activeTags}
+                onTagSelect={(tagName) => filterList(tagName)}
+              />
+            </View>
+          )}
         </View>
-        <TagsGrid />
-      </View> */}
-        <ScrollView style={{ marginTop: 30 }}>
-          <RecipesList />
+        <ScrollView>
+          <RecipesList selectedTags={activeTags} inputValue={input} />
         </ScrollView>
       </ScreenContainer>
       <Tabs />
@@ -38,11 +89,16 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     borderWidth: 1,
     borderRadius: 20,
-    textAlign: 'center',
-    textAlignVertical: 'center',
     flex: 1,
+  },
+  optionText: {
     ...Typography.regular,
     fontSize: 12,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+  },
+  tagList: {
+    height: '100%',
   },
 });
 
