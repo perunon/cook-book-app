@@ -97,6 +97,7 @@ export const newRecipeSlice = createSlice({
         i === id ? uri : picture
       );
     },
+    resetRecipe: () => initialState,
   },
 });
 
@@ -116,6 +117,7 @@ export const {
   addStep,
   toggleSelectedTag,
   setPicture,
+  resetRecipe,
 } = newRecipeSlice.actions;
 
 export default newRecipeSlice.reducer;

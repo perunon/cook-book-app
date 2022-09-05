@@ -3,9 +3,12 @@ import { faFolderOpen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../styles';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { resetRecipe } from '../slices/NewRecipeSlice';
 
 const Tabs = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.wrapper}>
@@ -18,7 +21,10 @@ const Tabs = () => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.menuItem}
-        onPress={() => navigation.navigate('StepOne')}
+        onPress={() => {
+          dispatch(resetRecipe());
+          navigation.push('StepOne');
+        }}
       >
         <FontAwesomeIcon icon={faPlus} />
         <Text>Add new recipe</Text>

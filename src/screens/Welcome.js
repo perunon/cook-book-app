@@ -8,8 +8,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../components/Footer';
 import { Colors, Typography } from '../styles';
+import { resetRecipe } from '../slices/NewRecipeSlice';
+import { useDispatch } from 'react-redux';
 
 const Welcome = ({ navigation }) => {
+  const dispatch = useDispatch();
   return (
     <>
       <View style={styles.background}>
@@ -20,7 +23,10 @@ const Welcome = ({ navigation }) => {
           <MenuOption
             text="Add new recipe"
             icon={faPencil}
-            onPress={navigation.navigate}
+            onPress={(target) => {
+              dispatch(resetRecipe());
+              navigation.push(target);
+            }}
             target="StepOne"
           />
           <MenuOption
