@@ -41,6 +41,7 @@ const RecipeStack = ({ route }) => {
       />
       {data.steps.map((step, i) => (
         <Steps.Screen
+          key={i}
           name={`${i}`}
           component={RecipeStep}
           options={{

@@ -5,10 +5,10 @@ import FitImage from 'react-native-fit-image';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '../styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPicture } from '../slices/StepFiveSlice';
+import { setPicture } from '../slices/NewRecipeSlice';
 
 const ImagesGrid = () => {
-  const data = useSelector((state) => state.stepFive.pictures);
+  const data = useSelector((state) => state.newRecipe.pictures);
   const dispatch = useDispatch();
 
   const pickImage = async (index) => {

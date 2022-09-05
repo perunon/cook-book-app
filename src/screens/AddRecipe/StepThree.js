@@ -3,11 +3,11 @@ import ScreenContainer from '../../components/ScreenContainer';
 import ScreenTitle from '../../components/ScreenTitle';
 import StepsList from '../../components/StepsList';
 import { useSelector, useDispatch } from 'react-redux';
-import { addStep, deleteStep, editStep } from '../../slices/StepThreeSlice';
+import { addStep, deleteStep, editStep } from '../../slices/NewRecipeSlice';
 import { useEffect } from 'react';
 
 const StepThree = ({ route }) => {
-  const steps = useSelector((state) => state.stepThree.steps);
+  const steps = useSelector((state) => state.newRecipe.steps);
   const dispatch = useDispatch();
 
   useEffect(() => {

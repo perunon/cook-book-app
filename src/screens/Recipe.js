@@ -82,7 +82,7 @@ const Recipe = ({ route, navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
-        <ScrollView>
+        <ScrollView style={styles.ingredientsList}>
           {ingredients.map((item, i) => (
             <Text key={i} style={styles.ingredientsItem}>
               {item.name}: {item.quantity}
@@ -126,6 +126,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     width: '50%',
   },
+  ingredientsList: {
+    marginBottom: 12,
+  },
   quantity: {
     width: '50%',
     flexDirection: 'row',
@@ -135,10 +138,10 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   quantityButton: {
-    height: '100%',
     flex: 1,
     borderRightWidth: 1,
     textAlignVertical: 'center',
+    justifyContent: 'center',
   },
   quantityButtonText: {
     textAlign: 'center',
@@ -159,7 +162,6 @@ const styles = StyleSheet.create({
   tagsTitle: {
     ...Typography.semibold,
     fontSize: 16,
-    marginTop: 10,
   },
   tagsList: {
     ...Typography.regular,

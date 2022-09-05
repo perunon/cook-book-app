@@ -10,19 +10,21 @@ import { Colors, Typography } from '../../styles';
 const StepFive = ({ navigation, route }) => {
   const dispatch = useDispatch();
 
-  const stepOne = useSelector((state) => state.stepOne);
-  const stepTwo = useSelector((state) => state.stepTwo);
-  const stepThree = useSelector((state) => state.stepThree);
-  const stepFour = useSelector((state) => state.stepFour);
-  const stepFive = useSelector((state) => state.stepFive);
+  const recipe = useSelector((state) => state.newRecipe);
 
-  const recipe = {
-    ...stepOne,
-    ...stepTwo,
-    ...stepThree,
-    ...stepFour,
-    ...stepFive,
-  };
+  // const stepOne = useSelector((state) => state.stepOne);
+  // const stepTwo = useSelector((state) => state.stepTwo);
+  // const stepThree = useSelector((state) => state.stepThree);
+  // const stepFour = useSelector((state) => state.stepFour);
+  // const stepFive = useSelector((state) => state.stepFive);
+
+  // const recipe = {
+  //   ...stepOne,
+  //   ...stepTwo,
+  //   ...stepThree,
+  //   ...stepFour,
+  //   ...stepFive,
+  // };
 
   return (
     <ScreenContainer>

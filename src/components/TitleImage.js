@@ -21,7 +21,7 @@ const TitleImage = ({ source, onImageChange }) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={pickImage}>
+    <TouchableWithoutFeedback onPress={() => source === '' && pickImage}>
       <View style={styles.imageView}>
         {source === '' ? (
           <FontAwesomeIcon icon={faPlus} size={100} color="white" />

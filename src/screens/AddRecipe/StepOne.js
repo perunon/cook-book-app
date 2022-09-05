@@ -11,7 +11,7 @@ import {
   setCookTime,
   setPrepTime,
   setSource,
-} from '../../slices/StepOneSlice';
+} from '../../slices/NewRecipeSlice';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
@@ -20,7 +20,7 @@ const StepOne = () => {
   const [validated, setValidated] = useState(true);
   const isMounted = useRef(false);
   const { name, description, prepTime, cookTime, source } = useSelector(
-    (state) => state.stepOne
+    (state) => state.newRecipe
   );
   const dispatch = useDispatch();
 

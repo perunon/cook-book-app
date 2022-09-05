@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { addTag, deleteTag } from '../../slices/TagsSlice';
-import { toggleSelectedTag } from '../../slices/StepFourSlice';
+import { toggleSelectedTag } from '../../slices/NewRecipeSlice';
 
 const StepFour = () => {
   const [value, setValue] = useState('');

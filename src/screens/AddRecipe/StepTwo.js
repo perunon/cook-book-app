@@ -9,12 +9,12 @@ import {
   updateIngredient,
   removeIngredient,
   addIngredient,
-} from '../../slices/StepTwoSlice';
+} from '../../slices/NewRecipeSlice';
 import IngredientsList from '../../components/IngredientsList';
 import { useEffect } from 'react';
 
 const StepTwo = ({ navigation }) => {
-  const { recipeFor, ingredients } = useSelector((state) => state.stepTwo);
+  const { recipeFor, ingredients } = useSelector((state) => state.newRecipe);
   const dispatch = useDispatch();
 
   useEffect(() => {

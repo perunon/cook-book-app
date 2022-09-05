@@ -1,9 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import stepOneReducer from './slices/StepOneSlice';
-import stepTwoReducer from './slices/StepTwoSlice';
-import stepThreeReducer from './slices/StepThreeSlice';
-import stepFourReducer from './slices/StepFourSlice';
-import stepFiveReducer from './slices/StepFiveSlice';
+import newRecipeReducer from './slices/NewRecipeSlice';
 import tagsReducer from './slices/TagsSlice';
 import recipesReducer from './slices/RecipesSlice';
 import { persistReducer, persistStore } from 'redux-persist';
@@ -18,11 +14,7 @@ const rootPersistConfig = {
 };
 
 const rootReducer = combineReducers({
-  stepOne: stepOneReducer,
-  stepTwo: stepTwoReducer,
-  stepThree: stepThreeReducer,
-  stepFour: stepFourReducer,
-  stepFive: stepFiveReducer,
+  newRecipe: newRecipeReducer,
   tags: tagsReducer,
   recipes: recipesReducer,
 });

@@ -4,7 +4,7 @@ import TagItem from './TagItem';
 import { useSelector } from 'react-redux';
 
 const TagsGrid = ({ data, onTagSelect, onLongPress = () => {} }) => {
-  const tags = useSelector((state) => state.stepFour.tags);
+  const tags = useSelector((state) => state.newRecipe.tags);
 
   return (
     <View style={styles.container}>
