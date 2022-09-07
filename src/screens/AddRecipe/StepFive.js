@@ -4,6 +4,7 @@ import Button from '../../components/Button';
 import ImagesGrid from '../../components/ImagesGrid';
 import ScreenContainer from '../../components/ScreenContainer';
 import ScreenTitle from '../../components/ScreenTitle';
+import { setCreatedAt } from '../../slices/NewRecipeSlice';
 import { addNewRecipe } from '../../slices/RecipesSlice';
 import { Colors, Typography } from '../../styles';
 

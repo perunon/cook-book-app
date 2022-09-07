@@ -11,17 +11,25 @@ import BrowseRecipesTagsList from '../components/BrowseRecipesTagList';
 import RecipesList from '../components/RecipesList';
 import ScreenContainer from '../components/ScreenContainer';
 import SingleLineInput from '../components/SingleLineInput';
+import SortList from '../components/SortList';
 import Tabs from '../components/Tabs';
 import { Typography } from '../styles';
 
 const BrowseRecipes = () => {
   const [areTagsShown, setAreTagsShown] = useState(false);
+  const [isSortClicked, setIsSortClicked] = useState(false);
   const [input, setInput] = useState('');
   const { tags } = useSelector((state) => state.tags);
   const [activeTags, setActiveTags] = useState([]);
 
   const toggleTags = () => {
+    setIsSortClicked(false);
     setAreTagsShown(!areTagsShown);
+  };
+
+  const toggleSort = () => {
+    setAreTagsShown(false);
+    setIsSortClicked(!isSortClicked);
   };
 
   const filterList = (tagName) => {
@@ -55,7 +63,10 @@ const BrowseRecipes = () => {
             >
               <Text style={styles.optionText}>Select tags</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.option}>
+            <TouchableOpacity
+              style={styles.option}
+              onPress={() => toggleSort()}
+            >
               <Text style={styles.optionText}>Sort by: Recently</Text>
             </TouchableOpacity>
           </View>
@@ -66,6 +77,11 @@ const BrowseRecipes = () => {
                 selectedTags={activeTags}
                 onTagSelect={(tagName) => filterList(tagName)}
               />
+            </View>
+          )}
+          {isSortClicked && (
+            <View style={styles.tagList}>
+              <SortList />
             </View>
           )}
         </View>

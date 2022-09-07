@@ -9,7 +9,7 @@ export const recipesSlice = createSlice({
   initialState,
   reducers: {
     addNewRecipe: (state, action) => {
-      const newRecipe = action.payload;
+      const newRecipe = { ...action.payload, createdAt: new Date() };
       state.recipes.push(newRecipe);
     },
     updateRecipeData: (state, action) => {
