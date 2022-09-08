@@ -1,15 +1,26 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { KeyboardAvoidingView, StyleSheet, View } from 'react-native';
 
 const ScreenContainer = ({ children }) => {
-  return <View style={styles.container}>{children}</View>;
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}
+    >
+      <View style={styles.inner}>{children}</View>
+    </KeyboardAvoidingView>
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  inner: {
     backgroundColor: 'white',
     padding: 20,
     flex: 1,
+    justifyContent: 'space-around',
   },
 });
 

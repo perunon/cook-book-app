@@ -21,6 +21,14 @@ const BrowseRecipes = () => {
   const [input, setInput] = useState('');
   const { tags } = useSelector((state) => state.tags);
   const [activeTags, setActiveTags] = useState([]);
+  const sortOptions = useSelector((state) => state.sorting);
+  let activeOption = '';
+
+  Object.keys(sortOptions).forEach((key) => {
+    if (sortOptions[key].isActive) {
+      activeOption = sortOptions[key];
+    }
+  });
 
   const toggleTags = () => {
     setIsSortClicked(false);
@@ -67,7 +75,9 @@ const BrowseRecipes = () => {
               style={styles.option}
               onPress={() => toggleSort()}
             >
-              <Text style={styles.optionText}>Sort by: Recently</Text>
+              <Text style={styles.optionText}>
+                Sort {activeOption.name.toLowerCase()}
+              </Text>
             </TouchableOpacity>
           </View>
           {areTagsShown && (
@@ -86,7 +96,11 @@ const BrowseRecipes = () => {
           )}
         </View>
         <ScrollView>
-          <RecipesList selectedTags={activeTags} inputValue={input} />
+          <RecipesList
+            selectedTags={activeTags}
+            inputValue={input}
+            activeOption={activeOption}
+          />
         </ScrollView>
       </ScreenContainer>
       <Tabs />

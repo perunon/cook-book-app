@@ -3,16 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSortStatus } from '../slices/SortingSlice';
 import RecipesListItem from './RecipesListItem';
 
-const RecipesList = ({ selectedTags, inputValue }) => {
-  const sortOptions = useSelector((state) => state.sorting);
-  let activeOption = '';
-
-  Object.keys(sortOptions).forEach((key) => {
-    if (sortOptions[key].isActive) {
-      activeOption = sortOptions[key];
-    }
-  });
-
+const RecipesList = ({ selectedTags, inputValue, activeOption }) => {
   let recipes = useSelector((state) => state.recipes.recipes).map(
     (item, index) => {
       return { ...item, id: index };
@@ -32,11 +23,11 @@ const RecipesList = ({ selectedTags, inputValue }) => {
   }
 
   if (activeOption.name === 'By Name') {
-    if (activeOption.isAsc) {
-      recipes = recipes.sort((a, b) => {
-        let nameA = a.name.toLowerCase();
-        let nameB = b.name.toLowerCase();
+    recipes = recipes.sort((a, b) => {
+      let nameA = a.name.toLowerCase();
+      let nameB = b.name.toLowerCase();
 
+      if (activeOption.isAsc) {
         if (nameA < nameB) {
           return -1;
         }
@@ -44,12 +35,7 @@ const RecipesList = ({ selectedTags, inputValue }) => {
           return 1;
         }
         return 0;
-      });
-    } else {
-      recipes = recipes.sort((a, b) => {
-        let nameA = a.name.toLowerCase();
-        let nameB = b.name.toLowerCase();
-
+      } else {
         if (nameA > nameB) {
           return -1;
         }
@@ -57,24 +43,15 @@ const RecipesList = ({ selectedTags, inputValue }) => {
           return 1;
         }
         return 0;
-      });
-    }
+      }
+    });
   } else if (activeOption.name === 'By Creation Date') {
-    if (activeOption.isAsc) {
-      recipes = recipes.sort((a, b) => {
-        let dateA = a.createdAt.getTime();
-        let dateB = b.createdAt.getTime();
+    recipes = recipes.sort((a, b) => {
+      let dateA = new Date(a.createdAt).getTime();
+      let dateB = new Date(b.createdAt).getTime();
 
-        return dateA - dateB;
-      });
-    } else {
-      recipes = recipes.sort((a, b) => {
-        let dateA = a.createdAt.getTime();
-        let dateB = b.createdAt.getTime();
-
-        return dateB - dateA;
-      });
-    }
+      return activeOption.isAsc ? dateA - dateB : dateB - dateA;
+    });
   }
 
   return (

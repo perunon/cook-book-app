@@ -7,8 +7,10 @@ import { Colors } from '../styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPicture } from '../slices/NewRecipeSlice';
 
-const ImagesGrid = () => {
-  const data = useSelector((state) => state.newRecipe.pictures);
+const ImagesGrid = ({ data = null }) => {
+  if (data === null) {
+    data = useSelector((state) => state.newRecipe.pictures);
+  }
   const dispatch = useDispatch();
 
   const pickImage = async (index) => {
